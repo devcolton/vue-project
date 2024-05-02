@@ -1,0 +1,13 @@
+header {
+  text-align: center;
+  background: white;
+  padding: 30px;
+  margin: auto; /* header의 양쪽 여백(margin)을 동등하게 맞춤 -> 수평가운데정렬 */
+  display: flex;
+  align-items: center; /* 하위 요소들 수직 가운데정렬 */
+  position: relative;
+}
+
+header h1 {
+  font-size: 50px;
+}

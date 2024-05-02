@@ -1,0 +1,32 @@
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+}
+
+/* Middle column */
+.column.main {
+  width: 75%;
+}
+
+/* Right column */
+.column.side {
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .column.side,
+  .column.main {
+    width: 100%;
+  }
+}
