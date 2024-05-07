@@ -1,7 +1,17 @@
+<script setup lang="ts">
+import router from '@/router'
+
+const submitLogin = () => {
+  router.push({name: 'dashboard'})
+}
+</script>
+
 <template>
-  <div class="popup">
+  <div class="container">
     <form id="loginForm">
-      <h1>Dream Farm Logo</h1>
+      <div class="input-group">
+        <h1>Dream Farm Logo</h1>
+      </div>
       <div class="input-group">
         <input required="true" type="text" name="id" autocomplete="off" class="input" />
         <label class="user-label">아이디</label>
@@ -10,31 +20,30 @@
         <input required="true" type="password" name="password" autocomplete="off" class="input" />
         <label class="user-label">비밀번호</label>
       </div>
-      <div class="check-group">
+      <div class="inline-group">
         <label class="custom-label">
-          <input type="checkbox" class="input" />
-          <span class="custom-checkbox"></span>
+          <input type="checkbox" class="custom-checkbox" />
           자동 로그인
         </label>
         <label class="custom-label">
-          <input type="checkbox" class="input" />
-          <span class="custom-checkbox"></span>
+          <input type="checkbox" class="custom-checkbox" />
           아이디 저장
         </label>
       </div>
-      <button type="button" name="loginBtn" class="btn">로그인</button>
+      <div class="input-group">
+        <button type="button" name="loginBtn" class="custom-btn" @click="submitLogin">로그인</button>
+      </div>
     </form>
   </div>
 </template>
 
 <style scoped>
-.popup {
+.container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 300px;
-  height: 250px;
+  width: 35rem;
   padding: 10px;
 }
 
@@ -49,8 +58,11 @@
 }
 
 .input-group {
+  width: 100%;
   position: relative;
+  align-self: center;
   margin: 5px;
+  padding: 5px;
 }
 
 .input {
@@ -66,7 +78,7 @@
 
 .user-label {
   position: absolute;
-  left: 15px;
+  left: 2rem;
   color: #d9ef97;
   pointer-events: none;
   transform: translateY(1rem);
@@ -87,52 +99,57 @@ input:valid ~ label {
   color: #d9ef97;
 }
 
-.check-group {
+.inline-group {
   display: flex;
-  align-self: center;
+  justify-content: center;
   margin: 5px;
   padding: 5px;
 }
 
-.input[type='checkbox'] {
-  display: none;
-}
-
 .custom-label {
+  font-size: 18px;
   color: #fff;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
 }
 
 /* Style for the custom checkbox */
 .custom-checkbox {
-  display: inline-block;
+  appearance: none;
   width: 20px;
   height: 20px;
   border: 2px solid #d9ef97;
-  border-radius: 4px;
+  border-radius: 5px;
+  background-color: transparent;
+  display: inline-block;
   position: relative;
+  margin-right: 10px;
   cursor: pointer;
 }
 
 /* Style for the custom checkmark */
-.custom-checkbox::after {
-  content: '';
+.custom-checkbox::before {
+  content: "";
+  background-color: #d9ef97;
+  display: block;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0);
   width: 10px;
   height: 10px;
-  background-color: #d9ef97;
-  border-radius: 2px;
-  opacity: 0;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Show the checkmark when checkbox is checked */
-.input[type='checkbox']:checked + .custom-checkbox::after {
-  opacity: 1;
+.custom-checkbox:checked:before {
+  transform: translate(-50%, -50%) scale(1);
 }
 
-button {
+.custom-btn {
   font-family:
     PlusJakartaSans,
     -apple-system,
@@ -155,10 +172,33 @@ button {
   cursor: pointer;
   box-shadow: 0 0.5rem 1rem rgba(143, 142, 142, 0.15) !important;
   background: #d9ef97;
+  width: 100%;
 }
 
-button:hover {
+.custom-btn:hover {
   background: #000;
   color: #d9ef97;
+}
+
+@media screen and (max-width: 1440px) {
+  .container {
+    width: 30rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 25rem;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .container {
+    width: 20rem;
+  }
+  .inline-group {
+    flex-direction: column;
+    align-items: self-start;
+  }
 }
 </style>
