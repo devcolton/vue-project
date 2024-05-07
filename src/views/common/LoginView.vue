@@ -1,7 +1,27 @@
 <script setup lang="ts">
 import router from '@/router'
+import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/stores/user'
+import instance from '@/apis/utils/instance'
 
-const submitLogin = () => {
+const store = useUserStore()
+const { user } = storeToRefs(store)
+const { getUser, setUser } = store
+
+const loing = async () => {
+  try {
+    const res = await instance.get('api/v1/login')
+  } catch(error) {
+    console.log(error)
+  }
+}
+
+onMounted(() => {
+  
+})
+
+const submitLogin: any = () => {
   router.push({name: 'dashboard'})
 }
 </script>
