@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import '@/assets/css/main.css'
+import '@/assets/css/main.css';
 import TheTitle from '@/components/TheTitle.vue';
 </script>
 
 <template>
-  <TheTitle />
+	<TheTitle />
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

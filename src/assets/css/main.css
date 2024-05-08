@@ -1,6 +1,6 @@
 main.container {
   display: flex;
-  height: calc(100vh - 140px - 69px);
+  height: calc(100vh - 141px - 70px);
 }
 
 /* Create two unequal columns that floats next to each other */

@@ -1,9 +1,9 @@
 footer {
   margin: auto;
   text-align: center;
-  background: #ddd;
   padding: 20px; /* 각각 위 오른쪽 아래 왼쪽 */
   display: flex;
   flex-direction: column; /* 요소들을 수평정렬 */
   font-size: 12px;
+  border-top: 1px solid #fff;
 }

@@ -3,8 +3,7 @@ import TheTitle from '@/components/TheTitle.vue';
 </script>
 
 <template>
-  <TheTitle />
+	<TheTitle />
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
