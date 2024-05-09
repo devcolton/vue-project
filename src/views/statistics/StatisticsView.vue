@@ -3,7 +3,9 @@ import TheTitle from '@/components/TheTitle.vue';
 </script>
 
 <template>
-	<TheTitle />
+	<div class="content">
+		<TheTitle :hasTab="true" />
+	</div>
 </template>
 
 <style scoped></style>

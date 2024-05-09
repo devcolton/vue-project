@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    copy: typeof import('./src/components/TheTitle copy.vue')['default']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
@@ -16,10 +17,24 @@ declare module 'vue' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TheAside: typeof import('./src/components/TheAside.vue')['default']
+    TheAsideContent: typeof import('./src/components/TheAsideContent.vue')['default']
+    TheAsideItem: typeof import('./src/components/aside/item/TheAsideItem.vue')['default']
+    TheButton: typeof import('./src/components/common/TheButton.vue')['default']
+    TheCctvAside: typeof import('./src/components/aside/TheCctvAside.vue')['default']
+    TheCheckbox: typeof import('./src/components/common/TheCheckbox.vue')['default']
     TheDashboard: typeof import('./src/components/TheDashboard.vue')['default']
+    TheDashboardAside: typeof import('./src/components/aside/TheDashboardAside.vue')['default']
+    TheDashboardAsideItem: typeof import('./src/components/aside/item/TheDashboardAsideItem.vue')['default']
     TheFooter: typeof import('./src/components/TheFooter.vue')['default']
     TheHeader: typeof import('./src/components/TheHeader.vue')['default']
+    TheInput: typeof import('./src/components/common/TheInput.vue')['default']
     TheNav: typeof import('./src/components/TheNav.vue')['default']
+    TheSelectbox: typeof import('./src/components/common/TheSelectbox.vue')['default']
+    TheTab: typeof import('./src/components/TheTab.vue')['default']
     TheTitle: typeof import('./src/components/TheTitle.vue')['default']
+    TheToggle: typeof import('./src/components/common/TheToggle.vue')['default']
+    TheUnitAside: typeof import('./src/components/aside/TheUnitAside.vue')['default']
+    TheUnitAsideItem: typeof import('./src/components/aside/item/TheUnitAsideItem.vue')['default']
   }
 }

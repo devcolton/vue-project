@@ -1,6 +1,13 @@
-main.container {
+.container {
+  height: calc(100vh - 100px - 50px);
   display: flex;
-  height: calc(100vh - 141px - 70px);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
 }
 
 /* Create two unequal columns that floats next to each other */

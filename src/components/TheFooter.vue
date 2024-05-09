@@ -3,7 +3,7 @@ import '@/assets/css/footer.css';
 </script>
 
 <template>
-	<footer>
+	<footer class="footer">
 		<h2>Footer</h2>
 	</footer>
 </template>

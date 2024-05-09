@@ -1,16 +1,19 @@
 @import '@/assets/css/base.css';
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: #1a413d;
-  color: #fff;
+.wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 ul {
   margin: 0;
   padding: 0;
+}
+
+.input-group {
+	width: 100%;
+	position: relative;
+	align-self: center;
+	margin: 5px;
+	padding: 5px;
 }

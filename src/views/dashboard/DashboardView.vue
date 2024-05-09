@@ -4,8 +4,10 @@ import TheDashboard from '@/components/TheDashboard.vue';
 </script>
 
 <template>
-	<TheTitle />
-	<TheDashboard />
+	<div class="content">
+		<TheTitle />
+		<TheDashboard />
+	</div>
 </template>
 
 <style scoped></style>

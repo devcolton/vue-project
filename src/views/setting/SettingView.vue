@@ -4,7 +4,9 @@ import TheTitle from '@/components/TheTitle.vue';
 </script>
 
 <template>
-	<TheTitle />
+	<div class="content">
+		<TheTitle />
+	</div>
 </template>
 
 <style scoped></style>

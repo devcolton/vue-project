@@ -19,7 +19,7 @@ const { userAuth } = user.value;
 </script>
 
 <template>
-	<nav>
+	<nav class="nav">
 		<el-menu
 			:router="true"
 			:default-active="$route.path"
@@ -53,16 +53,4 @@ const { userAuth } = user.value;
 	</nav>
 </template>
 
-<style scoped>
-nav ul {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	background-color: #082622;
-}
-
-nav ul li {
-	color: #fff;
-}
-</style>
+<style scoped></style>
