@@ -44,7 +44,7 @@ onMounted(() => {});
 					labelName="비밀번호"
 				/>
 			</div>
-			<div class="inline-group">
+			<div class="checkbox-group">
 				<TheCheckbox
 					inputId="autoLogin"
 					inputName="autoLogin"
@@ -84,7 +84,7 @@ onMounted(() => {});
 	text-align: center;
 }
 
-.inline-group {
+.checkbox-group {
 	display: flex;
 	justify-content: center;
 	margin: 5px;
@@ -107,7 +107,7 @@ onMounted(() => {});
 	.container {
 		width: 20rem;
 	}
-	.inline-group {
+	.checkbox-group {
 		flex-direction: column;
 		align-items: self-start;
 	}

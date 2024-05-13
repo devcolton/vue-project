@@ -41,10 +41,10 @@ defineProps<{
 	left: 5px;
 	cursor: pointer;
 	transition: 0.4s;
-	background: linear-gradient(40deg, #8983f7, #a3dafb 70%);
+	background: linear-gradient(40deg, #ff0080, #ff8c00 70%);
 	box-shadow:
-		-0px -0px 10px #8983f7,
-		-0px -0px 3px #8983f7;
+		0px 0px 3px rgb(255, 255, 20),
+		0px 0px 5px rgb(255, 255, 20);
 }
 
 .checkbox .slide {
@@ -71,10 +71,9 @@ defineProps<{
 
 .basic-toggle:checked + .checkbox .slide .toggle-bar {
 	transform: translateX(62px);
-	background: linear-gradient(40deg, #ff0080, #ff8c00 70%);
-
+	background: linear-gradient(40deg, #8983f7, #a3dafb 70%);
 	box-shadow:
-		0px 0px 3px rgb(255, 255, 20),
-		0px 0px 5px rgb(255, 255, 20);
+		-0px -0px 10px #8983f7,
+		-0px -0px 3px #8983f7;
 }
 </style>

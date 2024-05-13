@@ -29,12 +29,17 @@ declare module 'vue' {
     TheFooter: typeof import('./src/components/TheFooter.vue')['default']
     TheHeader: typeof import('./src/components/TheHeader.vue')['default']
     TheInput: typeof import('./src/components/common/TheInput.vue')['default']
+    TheModal: typeof import('./src/components/common/TheModal.vue')['default']
     TheNav: typeof import('./src/components/TheNav.vue')['default']
+    ThePopup: typeof import('./src/components/common/ThePopup.vue')['default']
+    TheRadio: typeof import('./src/components/common/TheRadio.vue')['default']
     TheSelectbox: typeof import('./src/components/common/TheSelectbox.vue')['default']
     TheTab: typeof import('./src/components/TheTab.vue')['default']
     TheTitle: typeof import('./src/components/TheTitle.vue')['default']
     TheToggle: typeof import('./src/components/common/TheToggle.vue')['default']
     TheUnitAside: typeof import('./src/components/aside/TheUnitAside.vue')['default']
     TheUnitAsideItem: typeof import('./src/components/aside/item/TheUnitAsideItem.vue')['default']
+    TheUserAside: typeof import('./src/components/aside/TheUserAside.vue')['default']
+    TheUserForm: typeof import('./src/components/TheUserForm.vue')['default']
   }
 }

@@ -19,8 +19,8 @@ defineProps<{
 		<TheToggle
 			v-if="hasToggle"
 			toggleId="autoYn"
-			toggleLtext="자동"
-			toggleRtext="수동"
+			toggleLtext="수동"
+			toggleRtext="자동"
 			toggleColor="dark"
 		/>
 	</div>

@@ -66,7 +66,7 @@ defineProps<{
 .toggle-item {
 	width: 25px;
 	height: 25px;
-	background-color: #1a413d;
+	background-color: #d9ef97;
 	border-radius: 1.7rem;
 	padding: 0.25rem 0;
 	display: flex;

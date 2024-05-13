@@ -17,3 +17,10 @@ ul {
 	margin: 5px;
 	padding: 5px;
 }
+
+.inline-group {
+	display: flex;
+	justify-content: center;
+	margin: 5px;
+	padding: 5px;
+}
