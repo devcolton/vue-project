@@ -1,6 +1,7 @@
 .container {
   height: calc(100vh - 100px - 50px);
   display: flex;
+  flex-flow: row wrap;
 }
 
 .content {

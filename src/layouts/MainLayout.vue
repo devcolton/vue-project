@@ -10,7 +10,7 @@ import TheCctvAside from '@/components/aside/TheCctvAside.vue';
 </script>
 
 <template>
-	<div class="wrap">
+	<div class="wrapper">
 		<TheHeader />
 		<main class="container">
 			<TheNav />

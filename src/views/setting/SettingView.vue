@@ -7,25 +7,29 @@ import TheUserForm from '@/components/TheUserForm.vue';
 <template>
 	<div class="content">
 		<TheTitle />
-		<TheUserForm :isSetting="true">
-			<div class="row">
-				<div class="button-box">
-					<TheButton btnName="btnUpdate" btnText="수정" />
-				</div>
+		<div class="wrapper">
+			<div class="setting">
+				<TheUserForm :isSetting="true">
+					<div class="row">
+						<div class="button-box">
+							<TheButton btnName="btnUpdate" btnText="수정" />
+						</div>
+					</div>
+				</TheUserForm>
 			</div>
-		</TheUserForm>
+		</div>
 	</div>
 </template>
 
 <style scoped>
-.wrapper {
-	height: 100%;
+.setting {
 	padding: 1rem 30rem;
-	margin: 2rem;
 	border: 1px solid white;
 	border-radius: 0.5rem;
+	margin: 3rem;
 	display: flex;
 	flex-direction: column;
+	height: 100%;
 }
 
 .button-box {

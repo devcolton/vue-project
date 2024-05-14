@@ -11,7 +11,6 @@ const toggleItems = ref([
 	{ name: '조명4', id: ' led04' },
 	{ name: '조명5', id: ' led05' },
 ]);
-
 const optionItems = ref([
 	{ value: 'value01', text: '컨트롤러01' },
 	{ value: 'value02', text: '컨트롤러02' },
@@ -19,12 +18,24 @@ const optionItems = ref([
 	{ value: 'value04', text: '컨트롤러04' },
 	{ value: 'value05', text: '컨트롤러05' },
 ]);
+const controllInfo = ref({
+	cid: 'value04',
+});
+
+const handleChangeSelect = async (name: string, value: string) => {
+	controllInfo.value = { ...controllInfo.value, [name]: value };
+};
 </script>
 
 <template>
 	<aside class="aside">
 		<div class="input-group">
-			<TheSelectbox selectName="controller" :optionItmes="optionItems" />
+			<TheSelectbox
+				selectName="controller"
+				:value="controllInfo.cid"
+				:optionItems="optionItems"
+				@change="handleChangeSelect"
+			/>
 		</div>
 		<div class="toggle-wrap" v-for="item in toggleItems" :key="item.id">
 			<span>{{ item.name }}</span>

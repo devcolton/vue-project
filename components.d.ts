@@ -31,6 +31,7 @@ declare module 'vue' {
     TheInput: typeof import('./src/components/common/TheInput.vue')['default']
     TheModal: typeof import('./src/components/common/TheModal.vue')['default']
     TheNav: typeof import('./src/components/TheNav.vue')['default']
+    ThePeriod: typeof import('./src/components/ThePeriod.vue')['default']
     ThePopup: typeof import('./src/components/common/ThePopup.vue')['default']
     TheRadio: typeof import('./src/components/common/TheRadio.vue')['default']
     TheSelectbox: typeof import('./src/components/common/TheSelectbox.vue')['default']

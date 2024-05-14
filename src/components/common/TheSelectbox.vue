@@ -1,20 +1,33 @@
 <script setup lang="ts">
+/* __placeholder__ */
+import type { OptionItem } from '@/interfaces/Common.interface';
+
 defineProps<{
+	value: string;
 	selectName: string;
 	selectColor?: string;
-	optionItmes: Array<optionItems>;
+	optionItems: Array<OptionItem>;
 }>();
 
-interface optionItems {
-	value: string;
-	text: string;
-}
+const emit = defineEmits<{
+	(e: 'change', name: string, value: string): void;
+}>();
+
+const handleChange = (event: Event) => {
+	const { name, value } = event.target as HTMLInputElement;
+	emit('change', name, value);
+};
 </script>
 
 <template>
 	<div class="select">
-		<select :name="selectName" :class="selectColor">
-			<option v-for="item in optionItmes" :key="item.value" :value="item.value">
+		<select
+			:name="selectName"
+			:value="value"
+			:class="selectColor"
+			@change="handleChange"
+		>
+			<option v-for="item in optionItems" :key="item.value" :value="item.value">
 				{{ item.text }}
 			</option>
 		</select>
@@ -30,7 +43,7 @@ select {
 	box-shadow: none;
 	/* Personalize */
 	flex: 1;
-	padding: 0 1em;
+	padding: 0 5em 0 2em;
 	color: #fff;
 	background-color: #1a413d;
 	background-image: none;
@@ -52,6 +65,9 @@ select::-ms-expand {
 	border-radius: 0.25em;
 	overflow: hidden;
 }
+.select:not(:first-child) {
+	margin-left: 0.5rem;
+}
 /* Arrow */
 .select::after {
 	content: '\25BC';
@@ -66,5 +82,8 @@ select::-ms-expand {
 /* Transition */
 .select:hover::after {
 	color: #d9ef97;
+}
+option {
+	text-align: center;
 }
 </style>

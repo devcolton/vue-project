@@ -12,79 +12,86 @@ const optionItems = ref([
 	{ value: 'coperation', text: '중간관리자' },
 	{ value: 'user', text: '사용자' },
 ]);
+const userInfo = ref({
+	userType: 'admin',
+	upperUser: 'user',
+});
+const handleChangeSelect = async (name: string, value: string) => {
+	userInfo.value = { ...userInfo.value, [name]: value };
+};
 </script>
 
 <template>
-	<div class="wrapper">
-		<div class="row">
-			<div class="image-box">
-				<div class="image-area">
-					<img
-						src="/Users/unid/devcolton/projects/vue-project/src/assets/images/default-avatar.jpg"
-						alt="사용자 IMAGE"
-					/>
-				</div>
-				<div v-if="isSetting" class="value-area">
-					<p class="name">홍길동님</p>
-					<p class="email">honggildong@naver.com</p>
-				</div>
+	<div class="row">
+		<div class="image-box">
+			<div class="image-area">
+				<img
+					src="/Users/unid/devcolton/projects/vue-project/src/assets/images/default-avatar.jpg"
+					alt="사용자 IMAGE"
+				/>
 			</div>
-			<div class="content-box">
-				<form id="userForm">
-					<div v-if="!isSetting" class="input-group">
-						<TheSelectbox
-							selectName="userType"
-							selectColor="dark"
-							:optionItmes="optionItems"
-						/>
-					</div>
-					<div v-if="!isSetting" class="input-group">
-						<TheSelectbox
-							selectName="upperUser"
-							selectColor="dark"
-							:optionItmes="optionItems"
-						/>
-					</div>
-					<div class="input-wrapper">
-						<TheInput
-							inputType="text"
-							inputName="userName"
-							labelName="사용자이름"
-						/>
-					</div>
-					<div class="input-wrapper">
-						<TheInput
-							inputType="text"
-							inputName="userPhone"
-							labelName="휴대폰번호"
-						/>
-					</div>
-					<div class="input-wrapper">
-						<TheInput
-							inputType="text"
-							inputName="userEmail"
-							labelName="이메일주소"
-						/>
-					</div>
-					<div class="input-wrapper">
-						<TheInput
-							inputType="password"
-							inputName="userPassword"
-							labelName="비밀번호"
-						/>
-					</div>
-					<div class="input-wrapper">
-						<TheInput
-							inputType="password"
-							inputName="userPasswordCheck"
-							labelName="비밀번호확인"
-						/>
-					</div>
-				</form>
+			<div v-if="isSetting" class="value-area">
+				<p class="name">홍길동님</p>
+				<p class="email">honggildong@naver.com</p>
 			</div>
 		</div>
-		<slot />
+		<div class="content-box">
+			<form id="userForm">
+				<div v-if="!isSetting" class="inline-group">
+					<TheSelectbox
+						selectName="userType"
+						selectColor="dark"
+						:value="userInfo.userType"
+						:optionItems="optionItems"
+						@change="handleChangeSelect"
+					/>
+					<TheSelectbox
+						selectName="upperUser"
+						selectColor="dark"
+						:value="userInfo.upperUser"
+						:optionItems="optionItems"
+						@change="handleChangeSelect"
+					/>
+				</div>
+				<div class="input-wrapper">
+					<TheInput
+						inputType="text"
+						inputName="userName"
+						labelName="사용자이름"
+					/>
+				</div>
+				<div class="input-wrapper">
+					<TheInput
+						inputType="text"
+						inputName="userPhone"
+						labelName="휴대폰번호"
+					/>
+				</div>
+				<div class="input-wrapper">
+					<TheInput
+						inputType="text"
+						inputName="userEmail"
+						labelName="이메일주소"
+					/>
+				</div>
+				<div class="input-wrapper">
+					<TheInput
+						inputType="password"
+						inputName="userPassword"
+						labelName="비밀번호"
+					/>
+				</div>
+				<div class="input-wrapper">
+					<TheInput
+						inputType="password"
+						inputName="userPasswordCheck"
+						labelName="비밀번호확인"
+					/>
+				</div>
+			</form>
+		</div>
 	</div>
+	<slot />
 	<!-- <form id="userForm">
 		<div class="input-group">
 			<TheSelectbox selectName="userType" :optionItmes="optionItems" />
@@ -140,19 +147,6 @@ const optionItems = ref([
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-}
-.wrapper {
-	height: 100%;
-	/* padding: 1rem 30rem; */
-	/* margin: 2rem; */
-	/* border: 1px solid white; */
-	/* border-radius: 0.5rem; */
-	display: flex;
-	flex-direction: column;
-}
-
-.wrapper div {
-	/* margin: 0.5rem; */
 }
 
 .wrapper .row {

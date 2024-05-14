@@ -1,7 +1,7 @@
 .nav {
   display: flex;
-  flex: none;
-  width: 63px;
+  /* flex: none;
+  width: 63px; */
   height: 100%;
 }
 
