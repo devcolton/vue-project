@@ -2,17 +2,27 @@
 import '@/assets/css/main.css';
 import TheTitle from '@/components/TheTitle.vue';
 import TheUserForm from '@/components/TheUserForm.vue';
+import { ref } from 'vue';
+
+const userForm = ref<InstanceType<typeof TheUserForm> | null>(null);
+const submitUpdate = () => {
+	console.log(userForm.value?.userInfo);
+};
 </script>
 
 <template>
 	<div class="content">
 		<TheTitle />
-		<div class="wrapper">
+		<div class="wrap">
 			<div class="setting">
-				<TheUserForm :isSetting="true">
+				<TheUserForm ref="userForm" :isSetting="true">
 					<div class="row">
 						<div class="button-box">
-							<TheButton btnName="btnUpdate" btnText="수정" />
+							<TheButton
+								btnName="btnUpdate"
+								btnText="수정"
+								@click="submitUpdate"
+							/>
 						</div>
 					</div>
 				</TheUserForm>

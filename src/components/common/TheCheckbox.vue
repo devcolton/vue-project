@@ -1,18 +1,29 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
 defineProps<{
+	checked: boolean;
 	inputId: string;
 	inputName: string;
 	labelName: string;
 }>();
+
+const el = ref<HTMLInputElement | null>(null);
+
+defineExpose({
+	el,
+});
 </script>
 
 <template>
 	<label class="custom-label">
 		<input
+			ref="el"
 			type="checkbox"
 			class="custom-checkbox"
 			:id="inputId"
 			:name="inputName"
+			:checked="checked"
 		/>
 		{{ labelName }}
 	</label>

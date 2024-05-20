@@ -3,13 +3,17 @@ defineProps<{
 	title: string;
 	size: string;
 }>();
+const emit = defineEmits<{
+	(e: 'close'): void;
+	(e: 'click'): void;
+}>();
 </script>
 
 <template>
-	<div class="modalcontainer" @click.self="$emit('close')">
+	<div class="modalcontainer" @click.self="emit('close')">
 		<div class="flex">
 			<div :class="'modal ' + size">
-				<div class="close" @click="$emit('close')"><span>&#43;</span></div>
+				<div class="close" @click="emit('close')"><span>&#43;</span></div>
 				<div class="title">
 					<h2>{{ title }}</h2>
 				</div>
@@ -17,8 +21,8 @@ defineProps<{
 					<slot />
 				</div>
 				<div class="buttons">
-					<button type="button" @click="$emit('close')">취소</button>
-					<button type="button">등록</button>
+					<button type="button" @click="emit('close')">취소</button>
+					<button type="button" @click="emit('click')">등록</button>
 				</div>
 			</div>
 		</div>
@@ -36,6 +40,7 @@ defineProps<{
 	left: 0;
 	right: 0;
 	background-color: rgba(255, 255, 255, 0.5);
+	z-index: 10;
 }
 
 .modal {

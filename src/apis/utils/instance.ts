@@ -5,6 +5,8 @@ const instance = axios.create({
 	baseURL: import.meta.env.VITE_API_URL,
 });
 
+instance.defaults.withCredentials = true;
+
 instance.interceptors.request.use(
 	async config => config,
 	async error => Promise.reject(error),

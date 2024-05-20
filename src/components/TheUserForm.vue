@@ -2,6 +2,7 @@
 import TheInput from '@/components/common/TheInput.vue';
 import TheSelectbox from '@/components/common/TheSelectbox.vue';
 import { ref } from 'vue';
+import type { UserInfo } from '@/interfaces/Common.interface';
 
 defineProps<{
 	isSetting: boolean;
@@ -12,13 +13,21 @@ const optionItems = ref([
 	{ value: 'coperation', text: '중간관리자' },
 	{ value: 'user', text: '사용자' },
 ]);
-const userInfo = ref({
+const userInfo = ref<UserInfo>({
 	userType: 'admin',
 	upperUser: 'user',
+	userName: '',
+	userPhone: '',
+	userEmail: '',
+	userPassword: '',
+	checkPassword: '',
 });
-const handleChangeSelect = async (name: string, value: string) => {
+const handleChangeInput = async (name: string, value: string) => {
 	userInfo.value = { ...userInfo.value, [name]: value };
 };
+defineExpose({
+	userInfo,
+});
 </script>
 
 <template>
@@ -43,49 +52,59 @@ const handleChangeSelect = async (name: string, value: string) => {
 						selectColor="dark"
 						:value="userInfo.userType"
 						:optionItems="optionItems"
-						@change="handleChangeSelect"
+						@change="handleChangeInput"
 					/>
 					<TheSelectbox
 						selectName="upperUser"
 						selectColor="dark"
 						:value="userInfo.upperUser"
 						:optionItems="optionItems"
-						@change="handleChangeSelect"
+						@change="handleChangeInput"
 					/>
 				</div>
 				<div class="input-wrapper">
 					<TheInput
+						:value="userInfo.userName"
 						inputType="text"
 						inputName="userName"
 						labelName="사용자이름"
+						@change="handleChangeInput"
 					/>
 				</div>
 				<div class="input-wrapper">
 					<TheInput
+						:value="userInfo.userPhone"
 						inputType="text"
 						inputName="userPhone"
 						labelName="휴대폰번호"
+						@change="handleChangeInput"
 					/>
 				</div>
 				<div class="input-wrapper">
 					<TheInput
+						:value="userInfo.userEmail"
 						inputType="text"
 						inputName="userEmail"
 						labelName="이메일주소"
+						@change="handleChangeInput"
 					/>
 				</div>
 				<div class="input-wrapper">
 					<TheInput
+						:value="userInfo.userPassword"
 						inputType="password"
 						inputName="userPassword"
 						labelName="비밀번호"
+						@change="handleChangeInput"
 					/>
 				</div>
 				<div class="input-wrapper">
 					<TheInput
+						:value="userInfo.checkPassword"
 						inputType="password"
 						inputName="userPasswordCheck"
 						labelName="비밀번호확인"
+						@change="handleChangeInput"
 					/>
 				</div>
 			</form>
@@ -149,14 +168,14 @@ const handleChangeSelect = async (name: string, value: string) => {
 	width: 100%;
 }
 
-.wrapper .row {
+.row {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 }
-.wrapper .row:first-child {
+.row:first-child {
 	flex: 1 1 80%;
 }
 

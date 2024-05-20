@@ -66,49 +66,47 @@ onMounted(() => {
 </script>
 
 <template>
-	<div class="wrapper">
-		<div class="period">
-			<div class="inline-group half">
-				<TheSelectbox
-					selectName="startYear"
-					:value="period.startYear"
-					:optionItems="yearOptionItems"
-					@change="handleChangeSelect"
-				/>
-				<TheSelectbox
-					selectName="startMonth"
-					:value="period.startMonth"
-					:optionItems="monthOptionItems"
-					@change="handleChangeSelect"
-				/>
-				<TheSelectbox
-					selectName="startDate"
-					:value="period.startDate"
-					:optionItems="dayOptionItems"
-					@change="handleChangeSelect"
-				/>
-			</div>
-			<div class="input-group symbol">~</div>
-			<div class="inline-group half">
-				<TheSelectbox
-					selectName="endYear"
-					:value="period.endYear"
-					:optionItems="yearOptionItems"
-					@change="handleChangeSelect"
-				/>
-				<TheSelectbox
-					selectName="endMonth"
-					:value="period.endMonth"
-					:optionItems="monthOptionItems"
-					@change="handleChangeSelect"
-				/>
-				<TheSelectbox
-					selectName="endDate"
-					:value="period.endDate"
-					:optionItems="dayOptionItems"
-					@change="handleChangeSelect"
-				/>
-			</div>
+	<div class="period">
+		<div class="inline-group half">
+			<TheSelectbox
+				selectName="startYear"
+				:value="period.startYear"
+				:optionItems="yearOptionItems"
+				@change="handleChangeSelect"
+			/>
+			<TheSelectbox
+				selectName="startMonth"
+				:value="period.startMonth"
+				:optionItems="monthOptionItems"
+				@change="handleChangeSelect"
+			/>
+			<TheSelectbox
+				selectName="startDate"
+				:value="period.startDate"
+				:optionItems="dayOptionItems"
+				@change="handleChangeSelect"
+			/>
+		</div>
+		<div class="input-group symbol">~</div>
+		<div class="inline-group half">
+			<TheSelectbox
+				selectName="endYear"
+				:value="period.endYear"
+				:optionItems="yearOptionItems"
+				@change="handleChangeSelect"
+			/>
+			<TheSelectbox
+				selectName="endMonth"
+				:value="period.endMonth"
+				:optionItems="monthOptionItems"
+				@change="handleChangeSelect"
+			/>
+			<TheSelectbox
+				selectName="endDate"
+				:value="period.endDate"
+				:optionItems="dayOptionItems"
+				@change="handleChangeSelect"
+			/>
 		</div>
 	</div>
 </template>

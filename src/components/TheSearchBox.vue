@@ -1,0 +1,30 @@
+<script setup lang="ts">
+defineProps<{
+	slotList: Array<string>;
+}>();
+</script>
+
+<template>
+	<div class="search-group">
+		<div class="search-item" v-for="(item, idx) in slotList" :key="idx">
+			<slot :name="item" />
+		</div>
+	</div>
+</template>
+
+<style scoped>
+.search-group {
+	display: flex;
+	justify-content: flex-start;
+	padding: 5px;
+	margin-bottom: 0.5rem;
+	background-color: #082622;
+}
+.search-item {
+	display: flex;
+	align-items: center;
+	flex-basis: fit-content;
+	min-width: 180px;
+	padding: 0 0.25rem;
+}
+</style>

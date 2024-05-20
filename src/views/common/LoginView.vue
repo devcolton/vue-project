@@ -1,27 +1,80 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
-// import { storeToRefs } from 'pinia';
-// import router from '@/router';
+import { onMounted, ref } from 'vue';
 import { useUserStore } from '@/stores/user';
 // import instance from '@/apis/utils/instance';
 import TheInput from '@/components/common/TheInput.vue';
 import TheCheckbox from '@/components/common/TheCheckbox.vue';
 import TheButton from '@/components/common/TheButton.vue';
+import type { LoginInfo } from '@/interfaces/Common.interface';
+import { deleteCookie, getCookie, setCookie } from '@/utils/cookie';
 
 const store = useUserStore();
-// const { user } = storeToRefs(store);
-// const { getUser, setUser } = store;
 const { setUser } = store;
+const loginInfo = ref<LoginInfo>({
+	id: '',
+	password: '',
+});
+const isAutoLogin = ref<boolean>(false);
+const isRememberId = ref<boolean>(false);
+const remember = ref<InstanceType<typeof TheCheckbox> | null>(null);
 
-// const loing = async () => {
-// 	try {
-// 		const res = await instance.get('api/v1/login');
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// };
+onMounted(() => {
+	const loginId = getCookie('rememberId');
+	const autoLogin = getCookie('autoLogin');
 
-onMounted(() => {});
+	if (loginId) {
+		loginInfo.value.id = loginId;
+		isRememberId.value = true;
+	}
+	if (autoLogin) {
+		isAutoLogin.value = true;
+	}
+});
+
+const login = async () => {
+	const { id, password } = loginInfo.value;
+	setUser(id, password, 'ADMIN');
+	if (remember.value?.el?.checked) {
+		setCookie({
+			key: 'rememberId',
+			value: loginInfo.value.id,
+			maxAge: 30,
+		});
+	}
+	// await instance
+	// 	.post('/auth/login/id', {}, { auth: { username: id, password: password } })
+	// 	.then(res => {
+	// 		if (res.data.status === 'success') {
+	// 			if (remember.value?.el?.checked) {
+	// 				setCookie({
+	// 					key: 'rememberId',
+	// 					value: loginInfo.value.id,
+	// 					maxAge: 30,
+	// 				});
+	// 			}
+	// 		}
+	// 	})
+	// 	.catch(e => console.log(e));
+};
+const handleInput = async (name: string, value: string) => {
+	loginInfo.value = { ...loginInfo.value, [name]: value };
+};
+const handleAutoLogin = async (event: Event) => {
+	const { checked } = event.target as HTMLInputElement;
+
+	if (checked) {
+		setCookie({ key: 'autoLogin', value: 'true', maxAge: 30 });
+	} else {
+		deleteCookie('autoLogin');
+	}
+};
+const handleRememberId = async (event: Event) => {
+	const { checked } = event.target as HTMLInputElement;
+
+	if (!checked) {
+		deleteCookie('rememberId');
+	}
+};
 
 // const submitLogin: any = () => {
 // 	router.push({ name: 'dashboard' });
@@ -35,29 +88,42 @@ onMounted(() => {});
 				<h1>Dream Farm Logo</h1>
 			</div>
 			<div class="input-group">
-				<TheInput inputType="text" inputName="id" labelName="아이디" />
+				<TheInput
+					:value="loginInfo.id"
+					inputType="text"
+					inputName="id"
+					labelName="아이디"
+					@change="handleInput"
+				/>
 			</div>
 			<div class="input-group">
 				<TheInput
+					:value="loginInfo.password"
 					inputType="password"
 					inputName="password"
 					labelName="비밀번호"
+					@change="handleInput"
 				/>
 			</div>
 			<div class="checkbox-group">
 				<TheCheckbox
+					:checked="isAutoLogin"
 					inputId="autoLogin"
 					inputName="autoLogin"
 					labelName="자동로그인"
+					@change="handleAutoLogin"
 				/>
 				<TheCheckbox
+					ref="remember"
+					:checked="isRememberId"
 					inputId="rememberId"
 					inputName="rememberId"
 					labelName="아이디저장"
+					@change="handleRememberId"
 				/>
 			</div>
 			<div class="input-group">
-				<TheButton btnName="loginBtn" btnText="로그인" @click="setUser" />
+				<TheButton btnName="loginBtn" btnText="로그인" @click="login" />
 			</div>
 		</form>
 	</div>

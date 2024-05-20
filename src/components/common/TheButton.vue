@@ -2,6 +2,7 @@
 defineProps<{
 	btnName: string;
 	btnText: string;
+	btnColor?: string;
 }>();
 const emit = defineEmits<{
 	(e: 'click'): void;
@@ -12,7 +13,7 @@ const emit = defineEmits<{
 	<button
 		type="button"
 		:name="btnName"
-		class="custom-btn"
+		:class="'custom-btn ' + btnColor"
 		@click="emit('click')"
 	>
 		{{ btnText }}
@@ -46,8 +47,32 @@ const emit = defineEmits<{
 	width: 100%;
 }
 
-.custom-btn:hover {
+/* .custom-btn:hover {
 	background: #000;
 	color: #d9ef97;
+} */
+.custom-btn:hover {
+	filter: brightness(1.2);
+}
+
+.danger {
+	background-color: #f56c6c;
+}
+.warning {
+	background-color: #e6a23c;
+}
+.primary {
+	background-color: #409eff;
+}
+.info {
+	background-color: #909399;
+}
+.success {
+	background-color: #67c23a;
+}
+.border {
+	background-color: var(--vt-c-default);
+	border: 1px solid white;
+	color: #fff;
 }
 </style>

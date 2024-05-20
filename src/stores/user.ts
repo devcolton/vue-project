@@ -1,25 +1,20 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
+import type { userData } from '@/interfaces/Store.interface';
 
 export const useUserStore = defineStore('user', () => {
 	const user = ref({} as userData);
 	const getUser = computed(() => user);
-	function setUser() {
-		user.value.userName = 'my NAME';
-		user.value.userId = 'my ID';
-		user.value.userAuth = 'ADMIN';
-	}
-	function $reset() {
+	const setUser = (userName: string, userId: string, role: string) => {
+		user.value.userName = userName;
+		user.value.userId = userId;
+		user.value.role = role;
+	};
+	const $reset = () => {
 		user.value.userName = '';
 		user.value.userId = '';
-		user.value.userAuth = '';
-	}
+		user.value.role = '';
+	};
 
 	return { user, getUser, setUser, $reset };
 });
-
-interface userData {
-	userName: string;
-	userId: string;
-	userAuth: string;
-}

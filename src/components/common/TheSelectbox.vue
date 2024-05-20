@@ -6,6 +6,7 @@ defineProps<{
 	value: string;
 	selectName: string;
 	selectColor?: string;
+	defaultOption?: boolean;
 	optionItems: Array<OptionItem>;
 }>();
 
@@ -27,6 +28,7 @@ const handleChange = (event: Event) => {
 			:class="selectColor"
 			@change="handleChange"
 		>
+			<option v-if="defaultOption" value="">전체</option>
 			<option v-for="item in optionItems" :key="item.value" :value="item.value">
 				{{ item.text }}
 			</option>

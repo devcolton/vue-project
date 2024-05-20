@@ -1,19 +1,31 @@
 <script setup lang="ts">
 defineProps<{
+	value: string;
 	inputType: string;
 	inputName: string;
 	labelName: string;
 	labelColor?: string;
 }>();
+
+const emit = defineEmits<{
+	(e: 'change', name: string, value: string): void;
+}>();
+
+const handleChange = (event: Event) => {
+	const { name, value } = event.target as HTMLInputElement;
+	emit('change', name, value);
+};
 </script>
 
 <template>
 	<input
+		:value="value"
 		required="true"
 		:type="inputType"
 		:name="inputName"
 		autocomplete="off"
 		class="input"
+		@change="handleChange"
 	/>
 	<label :class="'input-label ' + labelColor">{{ labelName }}</label>
 </template>

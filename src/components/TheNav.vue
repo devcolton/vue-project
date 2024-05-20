@@ -15,7 +15,7 @@ import { useUserStore } from '@/stores/user';
 const isCollapse = ref(true);
 const store = useUserStore();
 const { user } = storeToRefs(store);
-const { userAuth } = user.value;
+const { role } = user.value;
 </script>
 
 <template>
@@ -41,13 +41,17 @@ const { userAuth } = user.value;
 				<el-icon><PieChart /></el-icon>
 				<template #title>기간별 누적데이터</template>
 			</el-menu-item>
-			<el-menu-item index="/user" v-if="userAuth === 'ADMIN'">
+			<el-menu-item index="/user" v-if="role === 'ADMIN'">
 				<el-icon><UserFilled /></el-icon>
 				<template #title>사용자관리</template>
 			</el-menu-item>
 			<el-menu-item index="/setting">
-				<el-icon><setting /></el-icon>
+				<el-icon><Setting /></el-icon>
 				<template #title>환경설정</template>
+			</el-menu-item>
+			<el-menu-item index="/logout">
+				<el-icon><Setting /></el-icon>
+				<template #title>로그아웃</template>
 			</el-menu-item>
 		</el-menu>
 	</nav>

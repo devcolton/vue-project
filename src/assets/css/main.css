@@ -9,6 +9,7 @@
   flex-direction: column;
   flex: 1;
   overflow: auto;
+  height: 100%;
 }
 
 /* Create two unequal columns that floats next to each other */
