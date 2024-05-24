@@ -1,13 +1,14 @@
 <script setup lang="ts">
-/* __placeholder__ */
-import type { OptionItem } from '@/interfaces/Common.interface';
+import type { OptionItem } from '@/interfaces/Component.interface';
 
 defineProps<{
 	value: string;
 	selectName: string;
 	selectColor?: string;
-	defaultOption?: boolean;
+	defaultOption?: string;
 	optionItems: Array<OptionItem>;
+	disabled?: boolean;
+	labelName?: string;
 }>();
 
 const emit = defineEmits<{
@@ -22,13 +23,15 @@ const handleChange = (event: Event) => {
 
 <template>
 	<div class="select">
+		<label v-if="labelName">{{ labelName }}</label>
 		<select
 			:name="selectName"
 			:value="value"
 			:class="selectColor"
+			:disabled="disabled"
 			@change="handleChange"
 		>
-			<option v-if="defaultOption" value="">전체</option>
+			<option v-if="defaultOption" value="">{{ defaultOption }}</option>
 			<option v-for="item in optionItems" :key="item.value" :value="item.value">
 				{{ item.text }}
 			</option>
@@ -44,15 +47,22 @@ select {
 	border: 0;
 	box-shadow: none;
 	/* Personalize */
-	flex: 1;
+	flex: 1 1 50%;
 	padding: 0 5em 0 2em;
 	color: #fff;
 	background-color: #1a413d;
 	background-image: none;
 	cursor: pointer;
+	border-radius: 0.5em;
+}
+select:disabled {
+	background-color: #9e9e9e;
 }
 select.dark {
 	background-color: #082622;
+}
+select.dark:disabled {
+	background-color: #9e9e9e;
 }
 /* Remove IE arrow */
 select::-ms-expand {
@@ -84,6 +94,17 @@ select::-ms-expand {
 /* Transition */
 .select:hover::after {
 	color: #d9ef97;
+}
+.select label {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: #d9ef97;
+	padding: 0 0.5rem;
+	flex: none;
+	width: 5rem;
 }
 option {
 	text-align: center;

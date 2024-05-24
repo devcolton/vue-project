@@ -4,7 +4,7 @@ import { RouterView } from 'vue-router';
 
 <template>
 	<component :is="$route.meta.layout">
-		<RouterView />
+		<RouterView :key="$route.fullPath" />
 	</component>
 </template>
 

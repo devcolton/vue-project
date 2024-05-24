@@ -2,6 +2,17 @@
 import '@/assets/css/aside.css';
 import TheInput from '@/components/common/TheInput.vue';
 import TheButton from '@/components/common/TheButton.vue';
+import type { CctvInfo } from '@/interfaces/Cctv.interface';
+import { ref } from 'vue';
+
+const cctvInfo = ref<CctvInfo>({
+	name: '',
+	ipNo: '',
+	ipAddress: '',
+	id: '',
+	password: '',
+	checkPassword: '',
+});
 </script>
 
 <template>
@@ -9,6 +20,7 @@ import TheButton from '@/components/common/TheButton.vue';
 		<form id="cctvForm">
 			<div class="input-group">
 				<TheInput
+					:value="cctvInfo.name"
 					inputType="text"
 					inputName="cctvName"
 					labelName="카메라이름"
@@ -17,6 +29,7 @@ import TheButton from '@/components/common/TheButton.vue';
 			</div>
 			<div class="input-group">
 				<TheInput
+					:value="cctvInfo.ipNo"
 					inputType="text"
 					inputName="ipNumber"
 					labelName="IP번호"
@@ -25,6 +38,7 @@ import TheButton from '@/components/common/TheButton.vue';
 			</div>
 			<div class="input-group">
 				<TheInput
+					:value="cctvInfo.ipAddress"
 					inputType="text"
 					inputName="ipAddress"
 					labelName="IP주소"
@@ -33,6 +47,7 @@ import TheButton from '@/components/common/TheButton.vue';
 			</div>
 			<div class="input-group">
 				<TheInput
+					:value="cctvInfo.id"
 					inputType="text"
 					inputName="cctvId"
 					labelName="아이디"
@@ -41,9 +56,19 @@ import TheButton from '@/components/common/TheButton.vue';
 			</div>
 			<div class="input-group">
 				<TheInput
+					:value="cctvInfo.password"
 					inputType="password"
 					inputName="cctvPassword"
 					labelName="비밀번호"
+					labelColor="dark"
+				/>
+			</div>
+			<div class="input-group">
+				<TheInput
+					:value="cctvInfo.checkPassword"
+					inputType="password"
+					inputName="checkPassword"
+					labelName="비밀번호확인"
 					labelColor="dark"
 				/>
 			</div>

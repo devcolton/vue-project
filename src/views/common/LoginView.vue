@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useUserStore } from '@/stores/user';
-// import instance from '@/apis/utils/instance';
 import TheInput from '@/components/common/TheInput.vue';
 import TheCheckbox from '@/components/common/TheCheckbox.vue';
 import TheButton from '@/components/common/TheButton.vue';
 import type { LoginInfo } from '@/interfaces/Common.interface';
 import { deleteCookie, getCookie, setCookie } from '@/utils/cookie';
+import { LOGIN } from '@/apis/commonApis';
+import router from '@/router';
+import { GET_USER } from '@/apis/userApis';
+import { stringIsEmpty } from '@/utils/common';
 
 const store = useUserStore();
-const { setUser } = store;
+const { user, setUser } = store;
 const loginInfo = ref<LoginInfo>({
 	id: '',
 	password: '',
@@ -17,8 +20,9 @@ const loginInfo = ref<LoginInfo>({
 const isAutoLogin = ref<boolean>(false);
 const isRememberId = ref<boolean>(false);
 const remember = ref<InstanceType<typeof TheCheckbox> | null>(null);
+const auto = ref<InstanceType<typeof TheCheckbox> | null>(null);
 
-onMounted(() => {
+onMounted(async () => {
 	const loginId = getCookie('rememberId');
 	const autoLogin = getCookie('autoLogin');
 
@@ -28,33 +32,90 @@ onMounted(() => {
 	}
 	if (autoLogin) {
 		isAutoLogin.value = true;
+		loginInfo.value = JSON.parse(autoLogin);
+		const { id, password } = loginInfo.value;
+		const res = await LOGIN({ username: id, password });
+		if (res.status === 200 || res.status === 201) {
+			const { accessToken, refreshToken } = res.data;
+			await setUser({
+				...user,
+				accessToken,
+				refreshToken,
+			});
+
+			return router.replace('dashboard');
+		}
 	}
 });
 
-const login = async () => {
-	const { id, password } = loginInfo.value;
-	setUser(id, password, 'ADMIN');
-	if (remember.value?.el?.checked) {
-		setCookie({
-			key: 'rememberId',
-			value: loginInfo.value.id,
-			maxAge: 30,
-		});
+const isValid = async () => {
+	let result = true;
+	let msg = '';
+
+	for (const [key, value] of Object.entries(loginInfo.value)) {
+		if (stringIsEmpty(value.trim())) {
+			result = false;
+
+			switch (key) {
+				case 'id':
+					msg = '아이디를 입력해주세요.';
+					break;
+				case 'password':
+					msg = '비밀번호를 입력해주세요';
+					break;
+
+				default:
+					break;
+			}
+
+			return alert(msg);
+		}
 	}
-	// await instance
-	// 	.post('/auth/login/id', {}, { auth: { username: id, password: password } })
-	// 	.then(res => {
-	// 		if (res.data.status === 'success') {
-	// 			if (remember.value?.el?.checked) {
-	// 				setCookie({
-	// 					key: 'rememberId',
-	// 					value: loginInfo.value.id,
-	// 					maxAge: 30,
-	// 				});
-	// 			}
-	// 		}
-	// 	})
-	// 	.catch(e => console.log(e));
+
+	return result;
+};
+const login = async () => {
+	if (await isValid()) {
+		const { id, password } = loginInfo.value;
+
+		await LOGIN({ username: id, password })
+			.then(async res => {
+				if (res.status === 200 || res.status === 201) {
+					const { accessToken, refreshToken } = res.data;
+					const user = await GET_USER(id);
+
+					setUser({
+						userId: user.data.userId,
+						role: user.data.role,
+						accessToken,
+						refreshToken,
+					});
+					if (remember.value?.el?.checked) {
+						setCookie({
+							key: 'rememberId',
+							value: id,
+							maxAge: 30,
+						});
+					}
+					if (auto.value?.el?.checked) {
+						setCookie({
+							key: 'autoLogin',
+							value: JSON.stringify({
+								id: id,
+								password: password,
+							}),
+							maxAge: 30,
+						});
+					}
+
+					router.push({ name: 'dashboard' });
+				}
+			})
+			.catch(error => {
+				console.log(error);
+				alert(error.response.data.message);
+			});
+	}
 };
 const handleInput = async (name: string, value: string) => {
 	loginInfo.value = { ...loginInfo.value, [name]: value };
@@ -75,10 +136,6 @@ const handleRememberId = async (event: Event) => {
 		deleteCookie('rememberId');
 	}
 };
-
-// const submitLogin: any = () => {
-// 	router.push({ name: 'dashboard' });
-// };
 </script>
 
 <template>
@@ -107,6 +164,7 @@ const handleRememberId = async (event: Event) => {
 			</div>
 			<div class="checkbox-group">
 				<TheCheckbox
+					ref="auto"
 					:checked="isAutoLogin"
 					inputId="autoLogin"
 					inputName="autoLogin"

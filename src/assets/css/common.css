@@ -10,8 +10,18 @@
 	height: 100%;
 	width: 100%;
 	display: flex;
-	padding: 0.5rem;
+	padding: 0 0.5rem;
 	flex-flow: wrap column;
+	overflow: auto;
+}
+
+.rwrap {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	padding: 0 0.5rem;
+	flex-flow: wrap row;
+	overflow: auto;
 }
 
 ul {
@@ -32,4 +42,8 @@ ul {
 	justify-content: center;
 	margin: 5px;
 	padding: 5px;
+}
+
+.chart-component {
+	align-self: center;
 }

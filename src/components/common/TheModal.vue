@@ -2,6 +2,7 @@
 defineProps<{
 	title: string;
 	size: string;
+	btnName: string;
 }>();
 const emit = defineEmits<{
 	(e: 'close'): void;
@@ -22,7 +23,7 @@ const emit = defineEmits<{
 				</div>
 				<div class="buttons">
 					<button type="button" @click="emit('close')">취소</button>
-					<button type="button" @click="emit('click')">등록</button>
+					<button type="button" @click="emit('click')">{{ btnName }}</button>
 				</div>
 			</div>
 		</div>
@@ -105,6 +106,6 @@ const emit = defineEmits<{
 }
 
 .modal .buttons button:nth-of-type(2):hover {
-	filter: brightness(0.7);
+	filter: brightness(1.2);
 }
 </style>

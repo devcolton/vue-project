@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useUnitStore } from '@/stores/unit';
 import {
 	Opportunity,
 	Refresh,
@@ -8,18 +9,30 @@ import {
 	Filter,
 	Odometer,
 } from '@element-plus/icons-vue';
+import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
+
 defineProps<{
 	toggleName: string;
 	toggleText: string;
 	toggleIcon: string;
 }>();
-// const emit = defineEmits<{
-// 	(e: 'click'): void;
-// }>();
+const store = useUnitStore();
+const { unit } = storeToRefs(store);
+const { setIsShow } = store;
+const powerStatus = ref<boolean>(false);
+const handleChangePower = () => {
+	powerStatus.value = !powerStatus.value;
+};
 </script>
 <template>
-	<label class="aside-item">
-		<input type="checkbox" :name="toggleName" class="squre-toggle" />
+	<label class="aside-item" @click.prevent="setIsShow(toggleName)">
+		<input
+			type="checkbox"
+			:name="toggleName"
+			:checked="unit[toggleName].isShow"
+			class="squre-toggle"
+		/>
 		<div class="toggle toggle-icon">
 			<el-icon size="50">
 				<Refrigerator v-show="toggleIcon === 'conditioner'" />
@@ -31,8 +44,10 @@ defineProps<{
 				<Filter v-show="toggleIcon === 'pump'" />
 			</el-icon>
 		</div>
-		<div class="toggle">
-			<div class="toggle-item"></div>
+		<div class="toggle" @click.stop.prevent="handleChangePower">
+			<div :class="'toggle-item ' + (powerStatus ? 'active' : '')">
+				<small>{{ powerStatus ? 'ON' : 'OFF' }}</small>
+			</div>
 		</div>
 		<div class="toggle toggle-text">
 			<span>{{ toggleText }}</span>
@@ -50,9 +65,10 @@ defineProps<{
 	flex-direction: row;
 	text-align: center;
 	border-radius: 10px;
-	color: hsl(0, 0%, 30%);
+	background-color: #000;
+	color: #fff;
+
 	font-weight: 900;
-	background: #fff;
 	justify-content: center;
 	flex-wrap: wrap;
 	align-content: space-around;
@@ -64,15 +80,20 @@ defineProps<{
 }
 
 .toggle-item {
-	width: 25px;
-	height: 25px;
-	background-color: #d9ef97;
+	width: 40px;
+	height: 40px;
+	background-color: hsl(0, 0%, 80%);
 	border-radius: 1.7rem;
 	padding: 0.25rem 0;
 	display: flex;
 	align-self: center;
 	margin-left: 12px;
 	transition: background-color 100ms 100ms;
+	align-items: center;
+	justify-content: center;
+}
+.toggle-item small {
+	font-weight: bolder;
 }
 
 .toggle {
@@ -86,10 +107,11 @@ defineProps<{
 	align-items: center;
 }
 
-.squre-toggle:checked ~ div .toggle-item {
-	background-color: hsl(0, 0%, 80%);
+.toggle-item.active {
+	background-color: #d9ef97;
 }
 .aside-item:has(.squre-toggle:checked) {
-	background-color: #000;
+	background: #fff;
+	color: hsl(0, 0%, 30%);
 }
 </style>

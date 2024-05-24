@@ -17,14 +17,14 @@ defineProps<{
 	display: flex;
 	justify-content: flex-start;
 	padding: 5px;
-	margin-bottom: 0.5rem;
+	margin: 0.5rem;
 	background-color: #082622;
 }
 .search-item {
 	display: flex;
 	align-items: center;
 	flex-basis: fit-content;
-	min-width: 180px;
+	min-width: 250px;
 	padding: 0 0.25rem;
 }
 </style>

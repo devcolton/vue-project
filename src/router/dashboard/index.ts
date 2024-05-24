@@ -5,7 +5,11 @@ export const DashboardRouter = [
 	{
 		path: RouteURLs.DASHBOARD,
 		name: 'dashboard',
-		meta: { layout: MainLayout, name: '대시보드' },
+		meta: {
+			layout: MainLayout,
+			name: '대시보드',
+			role: ['ADMIN', 'STAFF', 'USER'],
+		},
 		component: () => import('@/views/dashboard/DashboardView.vue'),
 	},
 ];

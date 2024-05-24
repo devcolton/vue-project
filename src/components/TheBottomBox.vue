@@ -23,7 +23,7 @@ defineProps<{
 	display: flex;
 	align-items: center;
 	flex-basis: fit-content;
-	min-width: 180px;
+	min-width: 120px;
 	padding: 0 0.25rem;
 }
 </style>

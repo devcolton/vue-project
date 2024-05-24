@@ -1,14 +1,25 @@
 import axios from 'axios';
 import router from '@/router';
+import { useUserStore } from '@/stores/user';
+import { storeToRefs } from 'pinia';
 
 const instance = axios.create({
-	baseURL: import.meta.env.VITE_API_URL,
+	// baseURL: import.meta.env.VITE_API_URL,
 });
 
 instance.defaults.withCredentials = true;
 
 instance.interceptors.request.use(
-	async config => config,
+	async config => {
+		const store = useUserStore();
+		const { user } = storeToRefs(store);
+		const { accessToken } = user.value;
+
+		config.headers['Content-Type'] = 'application/json';
+		config.headers.Authorization = `Bearer ${accessToken}`;
+
+		return config;
+	},
 	async error => Promise.reject(error),
 );
 
@@ -20,10 +31,7 @@ instance.interceptors.response.use(
 
 		return response;
 	},
-	async error => {
-		router.push({ name: 'notFound' });
-		Promise.reject(error);
-	},
+	async error => Promise.reject(error),
 );
 
 export default instance;

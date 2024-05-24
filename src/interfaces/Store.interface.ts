@@ -1,5 +1,6 @@
-export interface userData {
-	userName: string;
+export interface UserData {
 	userId: string;
 	role: string;
+	accessToken: string;
+	refreshToken: string;
 }

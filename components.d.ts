@@ -46,5 +46,6 @@ declare module 'vue' {
     TheUnitAsideItem: typeof import('./src/components/aside/item/TheUnitAsideItem.vue')['default']
     TheUserAside: typeof import('./src/components/aside/TheUserAside.vue')['default']
     TheUserForm: typeof import('./src/components/TheUserForm.vue')['default']
+    UserForm: typeof import('./src/components/user/UserForm.vue')['default']
   }
 }

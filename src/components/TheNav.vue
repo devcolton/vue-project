@@ -8,6 +8,7 @@ import {
 	PieChart,
 	UserFilled,
 	Setting,
+	SwitchButton,
 } from '@element-plus/icons-vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
@@ -41,7 +42,7 @@ const { role } = user.value;
 				<el-icon><PieChart /></el-icon>
 				<template #title>기간별 누적데이터</template>
 			</el-menu-item>
-			<el-menu-item index="/user" v-if="role === 'ADMIN'">
+			<el-menu-item index="/user" v-if="role !== 'USER'">
 				<el-icon><UserFilled /></el-icon>
 				<template #title>사용자관리</template>
 			</el-menu-item>
@@ -50,7 +51,7 @@ const { role } = user.value;
 				<template #title>환경설정</template>
 			</el-menu-item>
 			<el-menu-item index="/logout">
-				<el-icon><Setting /></el-icon>
+				<el-icon><SwitchButton /></el-icon>
 				<template #title>로그아웃</template>
 			</el-menu-item>
 		</el-menu>

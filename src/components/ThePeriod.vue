@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue';
 import TheSelectbox from '@/components/common/TheSelectbox.vue';
 import { getLastDate } from '@/assets/js/common';
-import type { OptionItem } from '@/interfaces/Common.interface';
+import type { OptionItem } from '@/interfaces/Component.interface';
 
 const TODAY = new Date();
 
@@ -118,7 +118,7 @@ onMounted(() => {
 	margin: 0.5rem 0;
 	border-radius: 0.5rem;
 	align-self: center;
-	width: 72%;
+	width: 100%;
 }
 .symbol {
 	width: max-content;

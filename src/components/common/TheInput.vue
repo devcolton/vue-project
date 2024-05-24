@@ -3,8 +3,10 @@ defineProps<{
 	value: string;
 	inputType: string;
 	inputName: string;
-	labelName: string;
+	labelName?: string;
 	labelColor?: string;
+	disabled?: boolean;
+	maxLength?: number;
 }>();
 
 const emit = defineEmits<{
@@ -12,22 +14,34 @@ const emit = defineEmits<{
 }>();
 
 const handleChange = (event: Event) => {
-	const { name, value } = event.target as HTMLInputElement;
+	const { name } = event.target as HTMLInputElement;
+	let { value } = event.target as HTMLInputElement;
+
+	if (name === 'phoneNumber') {
+		value = value
+			.replace(/[^0-9]/g, '')
+			.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+	}
+
 	emit('change', name, value);
 };
 </script>
 
 <template>
 	<input
+		:disabled="disabled"
 		:value="value"
 		required="true"
 		:type="inputType"
 		:name="inputName"
+		:maxLength="maxLength"
 		autocomplete="off"
 		class="input"
-		@change="handleChange"
+		@input="handleChange"
 	/>
-	<label :class="'input-label ' + labelColor">{{ labelName }}</label>
+	<label v-if="labelName" :class="'input-label ' + labelColor">
+		{{ labelName }}
+	</label>
 </template>
 
 <style scoped>
@@ -59,13 +73,24 @@ const handleChange = (event: Event) => {
 }
 
 .input:focus,
-input:valid {
+.input:valid {
 	outline: none;
 	border: 1.5px solid #d9ef97;
 }
+.input:disabled {
+	outline: none;
+	border: 1.5px solid #9e9e9e;
+}
 
 .input:focus ~ label,
-input:valid ~ label {
+.input:valid ~ label {
+	transform: translateY(-50%) scale(0.8);
+	background-color: #1a413d;
+	padding: 0 0.2em;
+	color: #d9ef97;
+}
+
+.input:disabled ~ label {
 	transform: translateY(-50%) scale(0.8);
 	background-color: #1a413d;
 	padding: 0 0.2em;
@@ -73,7 +98,7 @@ input:valid ~ label {
 }
 
 .input:focus ~ label.dark,
-input:valid ~ label.dark {
+.input:valid ~ label.dark {
 	background-color: #082622;
 }
 </style>

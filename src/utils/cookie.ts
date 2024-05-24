@@ -1,4 +1,4 @@
-import type { CookieItem } from '@/interfaces/Common.interface';
+import type { CookieItem } from '@/interfaces/Util.interface';
 
 export const setCookie = ({ key, value, maxAge }: CookieItem) => {
 	// const NOW = new Date();

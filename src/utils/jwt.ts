@@ -1,7 +1,8 @@
-import jwt from 'jsonwebtoken';
+import { jwtDecode } from 'jwt-decode';
 
-export const decodedToken = async (token: string) => {
-	const decode = await jwt.decode(token);
+export const decodedToken = (token: string) => {
+	const decoded = jwtDecode(token);
 
-	return decode;
+	console.log(decoded);
+	return decoded;
 };
