@@ -33,26 +33,29 @@ const router = createRouter({
 	],
 });
 
-router.beforeEach(to => {
+router.beforeEach((to, from, next) => {
 	const store = useUserStore();
 	const { user } = storeToRefs(store);
 	const { role } = user.value;
 	const metaRole = to.meta.role as string[];
 
 	if (to.path === '/logout') {
-		console.log('logout');
+		console.log('Logged Out!');
 		const store = useUserStore();
 		const { $reset } = store;
 		$reset();
 		deleteCookie('autoLogin');
-		router.push('/login');
-	}
-	if (metaRole) {
-		if (metaRole.includes(role)) {
-			return;
+		next({ path: '/login' });
+	} else {
+		if (metaRole) {
+			if (metaRole.includes(role)) {
+				next();
+			} else {
+				alert('해당 페이지에 권한이 없습니다.');
+				next({ path: '/login' });
+			}
 		} else {
-			alert('해당 페이지에 권한이 없습니다.');
-			router.push('/login');
+			next();
 		}
 	}
 });

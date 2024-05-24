@@ -7,4 +7,4 @@ export const RouteURLs = {
 	USER: '/user',
 	SETTING: '/setting',
 	NOT_FOUND: '/:pathMatch(.*)*',
-};
+} as const;
