@@ -118,7 +118,7 @@ onMounted(() => {
 	margin: 0.5rem 0;
 	border-radius: 0.5rem;
 	align-self: center;
-	width: 100%;
+	width: 85%;
 }
 .symbol {
 	width: max-content;

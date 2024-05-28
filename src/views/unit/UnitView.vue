@@ -76,9 +76,6 @@ onMounted(() => console.log(unit.value));
 				v-for="(item, idx) of Object.values(unit).filter(v => v.isShow)"
 				:key="idx"
 			>
-				<div class="unit-title">
-					<h4>{{ item.name }}</h4>
-				</div>
 				<div class="unit-item">
 					<div class="unit-status">
 						<div>
@@ -95,7 +92,6 @@ onMounted(() => console.log(unit.value));
 					<div class="unit-controll">
 						<div class="range-area">
 							<label>온도</label>
-							<span>0&nbsp;&deg;C</span>
 							<input
 								id="temp"
 								class="slider"
@@ -106,11 +102,13 @@ onMounted(() => console.log(unit.value));
 								type="range"
 								@input="handleSingleRange"
 							/>
-							<span>50&nbsp;&deg;C</span>
+							<div class="value-range">
+								<span>0&nbsp;&deg;C</span>
+								<span>50&nbsp;&deg;C</span>
+							</div>
 						</div>
 						<div class="range-area">
 							<label>시간</label>
-							<span>{{ item.start }}</span>
 							<div class="rangeslider">
 								<div
 									class="rangeslider-inner"
@@ -143,12 +141,23 @@ onMounted(() => console.log(unit.value));
 									@input="handleMultiRange"
 								/>
 							</div>
-							<span>{{ item.end }}</span>
+							<div class="value-range">
+								<span>{{ item.start }}</span>
+								<span>{{ item.end }}</span>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<TheBottomBox :slotList="['reset', 'save']">
+			<template #reset>
+				<TheButton btnName="modalopen" btnColor="border" btnText="초기화" />
+			</template>
+			<template #save>
+				<TheButton btnName="modalopen" btnColor="primary" btnText="저장" />
+			</template>
+		</TheBottomBox>
 	</div>
 	<TheUnitAside />
 </template>
@@ -163,42 +172,34 @@ onMounted(() => console.log(unit.value));
 
 .unit {
 	display: flex;
-	flex-flow: wrap row;
-	height: 350px;
+	flex-flow: wrap column;
 	width: 100%;
+	justify-content: center;
+	align-items: flex-start;
 }
-.unit-title {
-	flex: none;
-	width: 100px;
+/* .unit-title {
+	flex: 1 1 10%;
+	width: 100%;
 	justify-content: center;
 	align-items: center;
 }
 .unit-title h4 {
 	font-weight: 900;
-}
+} */
 .unit-item {
+	width: 100%;
 	display: flex;
 	flex-flow: wrap column;
 	justify-content: center;
-}
-
-.unit-item:first-child {
-	flex: 1 1 20%;
-	align-items: flex-end;
-}
-.unit-item:last-child {
-	flex: 1 1 80%;
-	align-items: flex-start;
 }
 
 .unit-status {
 	display: flex;
-	flex-flow: wrap column;
+	flex-flow: wrap row;
 	justify-content: center;
 	align-items: center;
-	width: 180px;
-	height: 300px;
-	margin: 0.5rem;
+	margin: 0.25rem;
+	padding: 0.25rem;
 	border-radius: 20px;
 	background: #1a413d;
 	box-shadow:
@@ -210,8 +211,6 @@ onMounted(() => console.log(unit.value));
 	flex-flow: wrap column;
 	justify-content: center;
 	align-items: center;
-	width: 1050px;
-	height: 300px;
 	margin: 0.5rem;
 	border-radius: 20px;
 	background: #1a413d;
@@ -221,11 +220,11 @@ onMounted(() => console.log(unit.value));
 }
 
 .unit-status div:first-child {
-	border-bottom: 0.5px solid gray;
-	padding-bottom: 1.8rem;
+	flex: 1 1 50%;
+	border-right: 0.5px solid gray;
 }
 .unit-status div:last-child {
-	padding-top: 1.8rem;
+	flex: 1 1 50%;
 }
 .unit-status h1 {
 	text-align: center;
@@ -252,16 +251,19 @@ onMounted(() => console.log(unit.value));
 	align-items: center;
 }
 .range-area label {
-	flex: 1 1 5%;
-	text-align: center;
-}
-.range-area span {
-	flex: 1 1 5%;
+	flex: 1 1 100%;
+	margin-bottom: 0.5rem;
 	text-align: center;
 }
 .range-area input,
 .range-area .rangeslider {
-	flex: 1 1 80%;
+	flex: 1 1 100%;
+}
+.value-range {
+	flex: 1 1 100%;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 0.5rem;
 }
 .slider {
 	-webkit-appearance: none;
@@ -343,5 +345,3 @@ onMounted(() => console.log(unit.value));
 	pointer-events: auto;
 }
 </style>
-{ conditioner: undefined, sunshade: undefined, led: undefined, ventilationFan:
-undefined, gas: undefined, floatingFan: undefined, pump: undefined }

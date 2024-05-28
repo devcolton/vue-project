@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import '@/assets/css/main.css';
 import TheHeader from '@/components/TheHeader.vue';
-import TheFooter from '@/components/TheFooter.vue';
+// import TheFooter from '@/components/TheFooter.vue';
 import TheNav from '@/components/TheNav.vue';
 import TheDashboardAside from '@/components/aside/TheDashboardAside.vue';
 import TheCctvAside from '@/components/aside/TheCctvAside.vue';
@@ -18,6 +18,6 @@ import TheCctvAside from '@/components/aside/TheCctvAside.vue';
 			<TheDashboardAside v-if="$route.name === 'dashboard'" />
 			<TheCctvAside v-if="$route.name === 'cctv'" />
 		</main>
-		<TheFooter />
+		<!-- <TheFooter /> -->
 	</div>
 </template>

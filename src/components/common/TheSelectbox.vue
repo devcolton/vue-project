@@ -55,6 +55,11 @@ select {
 	cursor: pointer;
 	border-radius: 0.5em;
 }
+@media screen and (max-width: 1024px) {
+	select {
+		padding: 0 5em 0 1em;
+	}
+}
 select:disabled {
 	background-color: #9e9e9e;
 }

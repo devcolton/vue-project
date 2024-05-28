@@ -45,15 +45,12 @@ onMounted(async () => {
 				};
 			})
 			.catch(error => {
-				console.log(error);
-				alert(error.message);
+				console.error(error);
 			});
 	}
 });
 
 const handleChangeInput = async (name: string, value: string) => {
-	console.log(name);
-	console.log(value);
 	userInfo.value = { ...userInfo.value, [name]: value };
 };
 
@@ -141,7 +138,7 @@ const submitRegist = async () => {
 				return res;
 			})
 			.catch(error => {
-				alert(error);
+				console.error(error);
 			});
 	} else {
 		alert(isValided.msg);
@@ -172,8 +169,7 @@ const submitModify = async () => {
 				return res;
 			})
 			.catch(error => {
-				console.log(error);
-				alert(error);
+				console.error(error);
 			});
 	} else {
 		alert(isValided.msg);
@@ -188,7 +184,7 @@ defineExpose({
 </script>
 
 <template>
-	<div class="row">
+	<div class="user-box">
 		<div class="image-box">
 			<div class="image-area">
 				<img
@@ -283,7 +279,7 @@ defineExpose({
 			</form>
 		</div>
 	</div>
-	<div v-if="isSetting" class="row">
+	<div v-if="isSetting" class="user-box">
 		<div class="button-box">
 			<TheButton btnName="btnUpdate" btnText="수정" @click="submitModify" />
 		</div>
@@ -298,14 +294,14 @@ defineExpose({
 	width: 100%;
 }
 
-.row {
+.user-box {
 	width: 100%;
 	display: flex;
-	flex-direction: row;
+	flex-direction: user-box;
 	justify-content: center;
 	align-items: center;
 }
-.row:first-child {
+.user-box:first-child {
 	flex: 1 1 80%;
 }
 

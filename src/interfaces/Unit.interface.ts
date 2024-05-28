@@ -11,11 +11,19 @@ export interface UnitItems {
 
 export interface UnitItemAttr {
 	name: string;
+	status: UnitStatus;
 	isShow: boolean;
 	temp: number;
 	time: number;
 	start: string;
 	end: string;
+}
+
+export interface UnitStatus {
+	CID: string;
+	uid: number;
+	mode: number;
+	status: number;
 }
 
 export interface TimeRangeData {

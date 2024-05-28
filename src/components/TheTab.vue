@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const tabItems = ref([
-	{ tabId: '1', tabText: '지온지습률' },
-	{ tabId: '2', tabText: '잔존CO2' },
-	{ tabId: '3', tabText: '실내온도변화' },
-	{ tabId: '4', tabText: '실내습도변화' },
-	{ tabId: '5', tabText: '급액횟수' },
+	{ tabId: 1, tabText: '지온지습률' },
+	{ tabId: 2, tabText: '잔존CO2' },
+	{ tabId: 3, tabText: '실내온도변화' },
+	{ tabId: 4, tabText: '실내습도변화' },
+	{ tabId: 5, tabText: '급액횟수' },
 ]);
+const selectedTab = ref<number>(1);
+
+onMounted(async () => {});
 </script>
 
 <template>
@@ -15,14 +18,15 @@ const tabItems = ref([
 		<div class="radio-tile-group">
 			<div class="input-container" v-for="item in tabItems" :key="item.tabId">
 				<input
-					:id="item.tabId"
+					:id="'tab' + item.tabId"
 					class="radio-button"
 					type="radio"
 					name="category"
+					:checked="selectedTab === item.tabId"
 				/>
 				<div class="radio-tile">
 					<div class="icon walk-icon"></div>
-					<label :for="item.tabId" class="radio-tile-label">{{
+					<label :for="'tab' + item.tabId" class="radio-tile-label">{{
 						item.tabText
 					}}</label>
 				</div>

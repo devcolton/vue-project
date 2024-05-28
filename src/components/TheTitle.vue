@@ -39,4 +39,10 @@ defineProps<{
 .title h2 {
 	margin-right: 20px;
 }
+
+@media screen and (max-width: 1024px) {
+	.title h2 {
+		font-size: 1.5rem;
+	}
+}
 </style>

@@ -18,7 +18,7 @@ defineProps<{
 	justify-content: flex-start;
 	padding: 5px;
 	margin: 0.5rem;
-	background-color: #082622;
+	background-color: #1a413d;
 }
 .search-item {
 	display: flex;
@@ -26,5 +26,10 @@ defineProps<{
 	flex-basis: fit-content;
 	min-width: 250px;
 	padding: 0 0.25rem;
+}
+@media screen and (max-width: 1024px) {
+	.search-item {
+		min-width: 230px;
+	}
 }
 </style>

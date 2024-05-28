@@ -25,18 +25,18 @@ onMounted(async () => {
 				{ text: 'AABBCC000001', value: 'AABBCC000001' },
 			];
 		})
-		.catch(error => console.log(error));
+		.catch(error => console.error(error));
 
 	await GET_UNIT_SETTING(controllInfo.value.cid)
 		.then(res => {
 			console.log(res.data);
 		})
-		.catch(error => console.log(error));
+		.catch(error => console.error(error));
 	await GET_UNIT_STATUS(controllInfo.value.cid)
 		.then(res => {
 			console.log(res.data);
 		})
-		.catch(error => console.log(error));
+		.catch(error => console.error(error));
 });
 </script>
 

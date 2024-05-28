@@ -1,7 +1,20 @@
 .container {
-  height: calc(100vh - 100px - 50px);
+  /* height: calc(100vh - 100px - 50px); */
+  height: calc(100vh - 80px);
   display: flex;
   flex-flow: row wrap;
+}
+
+@media screen and (max-width: 1440px) {
+	.container  {
+    height: calc(100vh - 40px);
+  }
+}
+
+@media screen and (max-width: 1920px) {
+  .container  {
+    height: calc(100vh - 60px);
+  }
 }
 
 .content {
@@ -40,6 +53,10 @@
   padding: 20px;
 }
 
+.row {
+  display: flex;
+  flex-flow: wrap row;
+}
 /* Clear floats after the columns */
 .row::after {
   content: '';

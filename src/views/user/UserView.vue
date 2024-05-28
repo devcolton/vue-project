@@ -77,7 +77,7 @@ const registUser = async () => {
 			}
 		})
 		.catch(error => {
-			console.log(error);
+			console.error(error);
 		});
 };
 const modifyUser = async () => {
@@ -94,7 +94,7 @@ const modifyUser = async () => {
 			}
 		})
 		.catch(error => {
-			console.log(error);
+			console.error(error);
 		});
 };
 const deleteUsers = async () => {
@@ -111,8 +111,7 @@ const deleteUsers = async () => {
 				}
 			})
 			.catch(error => {
-				console.log(error);
-				alert(error);
+				console.error(error);
 			});
 	}
 };
@@ -125,7 +124,7 @@ const searchList = async () => {
 			tableData.value = res.data;
 		})
 		.catch(error => {
-			alert(error);
+			console.error(error);
 		});
 };
 const getsuperiors = async () => {
@@ -155,6 +154,7 @@ const handleCurrentChange = (val: UserInfo) => {
 					selectName="role"
 					:value="searchParams.role"
 					:optionItems="roleOptionItems"
+					selectColor="dark"
 					defaultOption="전체"
 					@change="handleChangeInput"
 				/>
@@ -165,6 +165,7 @@ const handleCurrentChange = (val: UserInfo) => {
 					selectName="superior"
 					:value="searchParams.superior"
 					:optionItems="upperOptionItems"
+					selectColor="dark"
 					defaultOption="전체"
 					@change="handleChangeInput"
 				/>

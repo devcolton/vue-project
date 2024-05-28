@@ -1,31 +1,63 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
-import type { UnitItemAttr, UnitItems } from '@/interfaces/Unit.interface';
+import type { UnitItems } from '@/interfaces/Unit.interface';
 import { UNIT } from '@/utils/Enum';
+
+const initStatusData = {
+	CID: '',
+	uid: 0,
+	mode: 0,
+	status: 0,
+};
+const initSettingData = {
+	isShow: false,
+	temp: 0,
+	time: 0,
+	start: '00:00',
+	end: '23:59',
+};
 
 export const useUnitStore = defineStore('unit', () => {
 	const unit = ref<UnitItems>({
 		conditioner: {
 			name: UNIT.CONDITIONER.name,
-			isShow: false,
-			temp: 0,
-			time: 0,
-			start: '00:00',
-			end: '23:59',
+			status: initStatusData,
+			...initSettingData,
 		},
-		sunshade: { name: UNIT.SUNSHADE.name } as UnitItemAttr,
-		led: { name: UNIT.LED.name } as UnitItemAttr,
-		ventilationFan: { name: UNIT.VENTILATION_FAN.name } as UnitItemAttr,
-		gas: { name: UNIT.GAS.name } as UnitItemAttr,
-		floatingFan: { name: UNIT.FLOATING_FAN.name } as UnitItemAttr,
-		pump: { name: UNIT.PUMP.name } as UnitItemAttr,
+		sunshade: {
+			name: UNIT.SUNSHADE.name,
+			status: initStatusData,
+			...initSettingData,
+		},
+		led: { name: UNIT.LED.name, status: initStatusData, ...initSettingData },
+		ventilationFan: {
+			name: UNIT.VENTILATION_FAN.name,
+			status: initStatusData,
+			...initSettingData,
+		},
+		gas: { name: UNIT.GAS.name, status: initStatusData, ...initSettingData },
+		floatingFan: {
+			name: UNIT.FLOATING_FAN.name,
+			status: initStatusData,
+			...initSettingData,
+		},
+		pump: { name: UNIT.PUMP.name, status: initStatusData, ...initSettingData },
 	});
 	const getUnit = computed(() => unit);
 	const setIsShow = (type: string) => {
-		unit.value[type] = {
-			...unit.value[type],
-			isShow: !unit.value[type].isShow,
-		};
+		for (const [key] of Object.entries(unit.value)) {
+			if (key === type) {
+				unit.value[type] = {
+					...unit.value[type],
+					isShow: true,
+				};
+			} else {
+				unit.value[key] = {
+					...unit.value[key],
+					isShow: false,
+				};
+			}
+		}
 	};
 	const setUnit = ({
 		conditioner,
@@ -47,18 +79,39 @@ export const useUnitStore = defineStore('unit', () => {
 	const $reset = () => {
 		unit.value.conditioner = {
 			name: UNIT.CONDITIONER.name,
-			isShow: false,
-			temp: 0,
-			time: 0,
-			start: '00:00',
-			end: '23:59',
+			status: initStatusData,
+			...initSettingData,
 		};
-		unit.value.sunshade = {} as UnitItemAttr;
-		unit.value.led = {} as UnitItemAttr;
-		unit.value.ventilationFan = {} as UnitItemAttr;
-		unit.value.gas = {} as UnitItemAttr;
-		unit.value.floatingFan = {} as UnitItemAttr;
-		unit.value.pump = {} as UnitItemAttr;
+		unit.value.sunshade = {
+			name: UNIT.SUNSHADE.name,
+			status: initStatusData,
+			...initSettingData,
+		};
+		unit.value.led = {
+			name: UNIT.LED.name,
+			status: initStatusData,
+			...initSettingData,
+		};
+		unit.value.ventilationFan = {
+			name: UNIT.VENTILATION_FAN.name,
+			status: initStatusData,
+			...initSettingData,
+		};
+		unit.value.gas = {
+			name: UNIT.CONDITIONER.name,
+			status: initStatusData,
+			...initSettingData,
+		};
+		unit.value.floatingFan = {
+			name: UNIT.FLOATING_FAN.name,
+			status: initStatusData,
+			...initSettingData,
+		};
+		unit.value.pump = {
+			name: UNIT.PUMP.name,
+			status: initStatusData,
+			...initSettingData,
+		};
 	};
 
 	return {

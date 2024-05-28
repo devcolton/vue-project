@@ -34,6 +34,17 @@ const { userId } = user.value;
 	height: 100%;
 }
 
+@media screen and (max-width: 1440px) {
+	.setting {
+		padding: 1rem 10rem;
+	}
+}
+@media screen and (max-width: 1024px) {
+	.setting {
+		padding: 1rem;
+	}
+}
+
 .button-box {
 	flex: 1 1 100%;
 	display: flex;

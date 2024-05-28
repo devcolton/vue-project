@@ -17,7 +17,8 @@ defineProps<{
 	display: flex;
 	justify-content: flex-end;
 	padding: 5px;
-	margin-top: 0.5rem;
+	margin: 0.5rem 0;
+	width: 100%;
 }
 .bottom-item {
 	display: flex;
