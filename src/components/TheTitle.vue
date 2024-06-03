@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import TheTab from '@/components/TheTab.vue';
-import TheToggle from '@/components/common/TheToggle.vue';
-
 defineProps<{
 	subTitle?: string;
-	hasTab?: boolean;
-	hasToggle?: boolean;
 }>();
 </script>
 
@@ -15,14 +10,6 @@ defineProps<{
 			{{ $route.meta.name }}
 			<span v-show="subTitle">&nbsp;&#124;&nbsp;{{ subTitle }}</span>
 		</h2>
-		<TheTab v-if="hasTab" />
-		<TheToggle
-			v-if="hasToggle"
-			toggleId="autoYn"
-			toggleLtext="수동"
-			toggleRtext="자동"
-			toggleColor="dark"
-		/>
 	</div>
 </template>
 

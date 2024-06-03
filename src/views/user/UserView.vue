@@ -45,7 +45,7 @@ onMounted(async () => {
 		});
 	}
 
-	getsuperiors();
+	getSuperiors();
 	searchList();
 });
 
@@ -127,13 +127,17 @@ const searchList = async () => {
 			console.error(error);
 		});
 };
-const getsuperiors = async () => {
-	await GET_USERS(user.value.userId, { role: 'STAFF' }).then(res => {
-		const result = res.data;
-		result.forEach((el: UserInfo) => {
-			upperOptionItems.value.push({ text: el.name, value: el.userId });
+const getSuperiors = async () => {
+	await GET_USERS(user.value.userId, { role: 'STAFF' })
+		.then(res => {
+			const result = res.data;
+			result.forEach((el: UserInfo) => {
+				upperOptionItems.value.push({ text: el.name, value: el.userId });
+			});
+		})
+		.catch(error => {
+			console.error(error);
 		});
-	});
 };
 const handleSelectionChange = (val: UserInfo[]) => {
 	multipleSelection.value = val.map(item => item.userId);

@@ -113,7 +113,7 @@ const LineChartOptions = ref({
 		<div class="column cctv">
 			<img
 				src="/Users/unid/devcolton/projects/vue-project/src/assets/images/default-cctv.png"
-				alt="사용자 IMAGE"
+				alt="CCTV IMAGE"
 				width="100%"
 				height="100%"
 			/>

@@ -4,9 +4,11 @@ import TheSelectbox from '@/components/common/TheSelectbox.vue';
 import { onMounted, ref } from 'vue';
 import type { UserInfo } from '@/interfaces/User.interface';
 import type { OptionItem } from '@/interfaces/Component.interface';
+import TheAlert from '@/components/common/TheAlert.vue';
 import { ROLE } from '@/utils/Enum';
 import { GET_USER, MOD_USER, REG_USER } from '@/apis/userApis';
 import { stringIsEmpty } from '@/utils/common';
+import type { AlertData } from '@/interfaces/Common.interface';
 
 const props = defineProps<{
 	isSetting: boolean;
@@ -26,6 +28,8 @@ const userInfo = ref<UserInfo>({
 	password: '',
 	checkPassword: '',
 });
+const alertData = ref<AlertData>({ status: 'success', message: '' });
+const alertRef = ref<InstanceType<typeof TheAlert> | null>(null);
 
 onMounted(async () => {
 	if (props.userId) {
@@ -56,20 +60,25 @@ const handleChangeInput = async (name: string, value: string) => {
 
 const isValid = async () => {
 	let result = true;
-	let msg = '';
 	const { role, password, checkPassword } = userInfo.value;
 
 	for (const [key, value] of Object.entries(userInfo.value)) {
 		if (key === 'role') {
 			if (!props.isSetting && stringIsEmpty(value.trim())) {
 				result = false;
-				msg = '권한을 선택해주세요.';
+				alertData.value = {
+					status: 'warning',
+					message: '권한을 선택해주세요.',
+				};
 				break;
 			}
 		} else if (key === 'superior') {
 			if (role === ROLE.USER.code && stringIsEmpty(value.trim())) {
 				result = false;
-				msg = '소속을 선택해주세요.';
+				alertData.value = {
+					status: 'warning',
+					message: '소속을 선택해주세요.',
+				};
 				break;
 			}
 		} else if (key === 'password') {
@@ -78,18 +87,27 @@ const isValid = async () => {
 				stringIsEmpty(value.trim())
 			) {
 				result = false;
-				msg = '비밀번호를 입력해주세요.';
+				alertData.value = {
+					status: 'warning',
+					message: '비밀번호를 입력해주세요.',
+				};
 				break;
 			}
 		} else if (key === 'checkPassword') {
 			if (!stringIsEmpty(password) && stringIsEmpty(value.trim())) {
 				result = false;
-				msg = '비밀번호확인을 입력해주세요.';
+				alertData.value = {
+					status: 'warning',
+					message: '비밀번호확인을 입력해주세요.',
+				};
 				break;
 			}
 			if (!stringIsEmpty(password) && password !== checkPassword) {
 				result = false;
-				msg = '비밀번호확인이 일치하지 않습니다.';
+				alertData.value = {
+					status: 'warning',
+					message: '비밀번호확인이 일치하지 않습니다.',
+				};
 				break;
 			}
 		} else {
@@ -98,16 +116,28 @@ const isValid = async () => {
 
 				switch (key) {
 					case 'userId':
-						msg = '아이디를 입력해주세요';
+						alertData.value = {
+							status: 'warning',
+							message: '아이디를 입력해주세요.',
+						};
 						break;
 					case 'name':
-						msg = '사용자이름을 입력해주세요';
+						alertData.value = {
+							status: 'warning',
+							message: '사용자이름을 입력해주세요.',
+						};
 						break;
 					case 'phoneNumber':
-						msg = '휴대폰번호를 입력해주세요';
+						alertData.value = {
+							status: 'warning',
+							message: '휴대폰번호를 입력해주세요.',
+						};
 						break;
 					case 'address':
-						msg = '주소를 입력해주세요';
+						alertData.value = {
+							status: 'warning',
+							message: '주소를 입력해주세요.',
+						};
 						break;
 
 					default:
@@ -118,7 +148,7 @@ const isValid = async () => {
 		}
 	}
 
-	return { result, msg };
+	return { result };
 };
 
 const submitRegist = async () => {
@@ -132,7 +162,11 @@ const submitRegist = async () => {
 		return await REG_USER(userInfo.value)
 			.then(res => {
 				if (res.status === 201) {
-					alert('등록되었습니다.');
+					alertData.value = {
+						status: 'success',
+						message: '등록되었습니다.',
+					};
+					alertRef.value?.open();
 				}
 
 				return res;
@@ -141,7 +175,7 @@ const submitRegist = async () => {
 				console.error(error);
 			});
 	} else {
-		alert(isValided.msg);
+		alertRef.value?.open();
 	}
 };
 const submitModify = async () => {
@@ -151,7 +185,6 @@ const submitModify = async () => {
 		return await MOD_USER(userInfo.value)
 			.then(res => {
 				if (res.status === 200) {
-					alert('수정되었습니다.');
 					const result = res.data;
 
 					userName.value = result.name;
@@ -164,6 +197,12 @@ const submitModify = async () => {
 						role: result.role,
 						superior: result.superior,
 					};
+
+					alertData.value = {
+						status: 'success',
+						message: '수정되었습니다.',
+					};
+					alertRef.value?.open();
 				}
 
 				return res;
@@ -172,7 +211,7 @@ const submitModify = async () => {
 				console.error(error);
 			});
 	} else {
-		alert(isValided.msg);
+		alertRef.value?.open();
 	}
 };
 
@@ -285,6 +324,11 @@ defineExpose({
 		</div>
 	</div>
 	<slot />
+	<teleport to="body">
+		<TheAlert ref="alertRef" :status="alertData.status">
+			<h3>{{ alertData.message }}</h3>
+		</TheAlert>
+	</teleport>
 </template>
 
 <style scoped>

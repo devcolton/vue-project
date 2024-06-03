@@ -65,7 +65,7 @@ defineProps<{
 .checkbox .slide .toggle-text {
 	font-size: 16px;
 	font-weight: 700;
-	z-index: 100;
+	z-index: 10;
 	cursor: pointer;
 }
 

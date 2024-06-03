@@ -3,9 +3,13 @@ import '@/assets/css/main.css';
 import TheHeader from '@/components/TheHeader.vue';
 // import TheFooter from '@/components/TheFooter.vue';
 import TheNav from '@/components/TheNav.vue';
-import TheDashboardAside from '@/components/aside/TheDashboardAside.vue';
 import TheCctvAside from '@/components/aside/TheCctvAside.vue';
-// import TheUserAside from '@/components/aside/TheUserAside.vue';
+import TheLoadingBar from '@/components/common/TheLoadingBar.vue';
+import { useLoadingStore } from '@/stores/loading';
+import { storeToRefs } from 'pinia';
+
+const loadingStore = useLoadingStore();
+const { loading } = storeToRefs(loadingStore);
 </script>
 
 <template>
@@ -13,11 +17,10 @@ import TheCctvAside from '@/components/aside/TheCctvAside.vue';
 		<TheHeader />
 		<main class="container">
 			<TheNav />
-			<!-- <TheUserAside v-if="$route.name === 'user'" /> -->
 			<slot />
-			<TheDashboardAside v-if="$route.name === 'dashboard'" />
 			<TheCctvAside v-if="$route.name === 'cctv'" />
 		</main>
 		<!-- <TheFooter /> -->
+		<TheLoadingBar :is-loading="loading" />
 	</div>
 </template>

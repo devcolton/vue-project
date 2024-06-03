@@ -11,6 +11,19 @@ const tabItems = ref([
 const selectedTab = ref<number>(1);
 
 onMounted(async () => {});
+
+const handleChangeTabId = (tabId: number) => {
+	selectedTab.value = tabId;
+	emit('change', tabId);
+};
+
+const emit = defineEmits<{
+	(e: 'change', selectedTab: number): void;
+}>();
+
+defineExpose({
+	selectedTab,
+});
 </script>
 
 <template>
@@ -23,6 +36,7 @@ onMounted(async () => {});
 					type="radio"
 					name="category"
 					:checked="selectedTab === item.tabId"
+					@change="handleChangeTabId(item.tabId)"
 				/>
 				<div class="radio-tile">
 					<div class="icon walk-icon"></div>
@@ -38,8 +52,9 @@ onMounted(async () => {});
 <style scoped>
 .tab-container {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
+	padding: 0 1rem;
 }
 
 .radio-tile-group {

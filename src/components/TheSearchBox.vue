@@ -29,7 +29,7 @@ defineProps<{
 }
 @media screen and (max-width: 1024px) {
 	.search-item {
-		min-width: 230px;
+		min-width: 100px;
 	}
 }
 </style>

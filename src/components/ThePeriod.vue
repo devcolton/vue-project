@@ -72,18 +72,21 @@ onMounted(() => {
 				selectName="startYear"
 				:value="period.startYear"
 				:optionItems="yearOptionItems"
+				selectColor="dark"
 				@change="handleChangeSelect"
 			/>
 			<TheSelectbox
 				selectName="startMonth"
 				:value="period.startMonth"
 				:optionItems="monthOptionItems"
+				selectColor="dark"
 				@change="handleChangeSelect"
 			/>
 			<TheSelectbox
 				selectName="startDate"
 				:value="period.startDate"
 				:optionItems="dayOptionItems"
+				selectColor="dark"
 				@change="handleChangeSelect"
 			/>
 		</div>
@@ -93,18 +96,21 @@ onMounted(() => {
 				selectName="endYear"
 				:value="period.endYear"
 				:optionItems="yearOptionItems"
+				selectColor="dark"
 				@change="handleChangeSelect"
 			/>
 			<TheSelectbox
 				selectName="endMonth"
 				:value="period.endMonth"
 				:optionItems="monthOptionItems"
+				selectColor="dark"
 				@change="handleChangeSelect"
 			/>
 			<TheSelectbox
 				selectName="endDate"
 				:value="period.endDate"
 				:optionItems="dayOptionItems"
+				selectColor="dark"
 				@change="handleChangeSelect"
 			/>
 		</div>
@@ -114,16 +120,17 @@ onMounted(() => {
 <style scoped>
 .period {
 	display: flex;
-	background-color: #082622;
-	margin: 0.5rem 0;
-	border-radius: 0.5rem;
 	align-self: center;
-	width: 85%;
+	width: 100%;
 }
 .symbol {
 	width: max-content;
 }
 .half {
 	width: 50%;
+}
+.inline-group {
+	margin: 0;
+	padding: 0;
 }
 </style>

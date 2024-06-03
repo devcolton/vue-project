@@ -48,7 +48,7 @@ select {
 	box-shadow: none;
 	/* Personalize */
 	flex: 1 1 50%;
-	padding: 0 5em 0 2em;
+	padding: 0 6em 0 2em;
 	color: #fff;
 	background-color: #1a413d;
 	background-image: none;
@@ -57,7 +57,7 @@ select {
 }
 @media screen and (max-width: 1024px) {
 	select {
-		padding: 0 5em 0 1em;
+		padding: 0 6em 0 1em;
 	}
 }
 select:disabled {

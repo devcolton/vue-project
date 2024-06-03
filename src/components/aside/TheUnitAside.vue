@@ -3,6 +3,7 @@ import { GET_CONTROLLERS } from '@/apis/commonApis';
 import { GET_UNIT_SETTING, GET_UNIT_STATUS } from '@/apis/unitApis';
 import '@/assets/css/aside.css';
 import TheUnitAsideItem from '@/components/aside/item/TheUnitAsideItem.vue';
+import TheToggle from '@/components/common/TheToggle.vue';
 import type { OptionItem } from '@/interfaces/Component.interface';
 import { onMounted, ref } from 'vue';
 import { UNIT } from '@/utils/Enum';
@@ -49,6 +50,9 @@ onMounted(async () => {
 				:optionItems="optionItems"
 				@change="handleChangeSelect"
 			/>
+		</div>
+		<div class="input-group">
+			<TheToggle toggleId="autoYn" toggleLtext="수동" toggleRtext="자동" />
 		</div>
 		<TheUnitAsideItem
 			v-for="item of UNIT"
